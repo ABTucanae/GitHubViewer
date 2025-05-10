@@ -12,8 +12,8 @@ struct UserListView: View {
     @State private var testData = ["A", "B", "C"]
 
     var body: some View {
-        List(testData, id: \.self) { item in
-            UserListRow(title: item)
+        List(testData, id: \.self) { user in
+            UserListRow(user: user)
         }
         .navigationTitle("Users")
     }
@@ -23,4 +23,5 @@ struct UserListView: View {
     NavigationView {
         UserListView()
     }
+    .environmentObject(Router())
 }

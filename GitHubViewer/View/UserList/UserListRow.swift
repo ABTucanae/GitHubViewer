@@ -9,17 +9,18 @@ import SwiftUI
 
 struct UserListRow: View {
 
-    let title: String
+    let user: String
+    @EnvironmentObject var router: Router
 
     var body: some View {
-        NavigationLink(destination: Text(title)) {
+        NavigationLink(destination: router.view(for: user)) {
             HStack(spacing: 16) {
                 Image(systemName: "square.fill")
                     .resizable()
                     .frame(width: 32, height: 32)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
 
-                Text(title)
+                Text(user)
                     .font(.title3)
             }
             .padding(.vertical, 4)
@@ -30,7 +31,8 @@ struct UserListRow: View {
 #Preview {
     NavigationView {
         List {
-            UserListRow(title: "Example")
+            UserListRow(user: "Example")
         }
     }
+    .environmentObject(Router())
 }

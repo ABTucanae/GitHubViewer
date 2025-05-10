@@ -14,6 +14,7 @@ struct GitHubViewerApp: App {
             NavigationView {
                 UserListView()
             }
+            .environmentObject(Router())
         }
     }
 }

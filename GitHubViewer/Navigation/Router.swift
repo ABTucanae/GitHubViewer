@@ -7,9 +7,21 @@
 
 import SwiftUI
 
+@Observable
 @MainActor
-class Router: ObservableObject {
-    func view(for user: String) -> some View {
-        Text(user)
+class Router {
+
+    private let viewModelFactory: ViewModelBuildable
+
+    init(viewModelFactory: ViewModelBuildable) {
+        self.viewModelFactory = viewModelFactory
+    }
+
+    func initialView() -> some View {
+        UserListView(viewModel: viewModelFactory.userListViewModel())
+    }
+
+    func view(for user: User) -> some View {
+        Text(user.login)
     }
 }

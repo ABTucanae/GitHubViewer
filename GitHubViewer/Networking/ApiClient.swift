@@ -21,8 +21,8 @@ class ApiClient: ApiClientProtocol {
         self.requestFactory = requestFactory
     }
 
-    func makeRequest<T: Decodable>(endpoint: String, method: HTTPMethod = .GET) async throws -> T {
-        guard let url = constructURL(endpoint: endpoint) else {
+    func makeRequest<T: Decodable>(endpoint: String, method: HTTPMethod) async throws -> T {
+        guard let url = URL(string: endpoint) else {
             throw NetworkError.unableToCreateURL
         }
 
@@ -36,9 +36,5 @@ class ApiClient: ApiClientProtocol {
         let decoder = JSONDecoder()
 
         return try decoder.decode(T.self, from: data)
-    }
-
-    private func constructURL(endpoint: String) -> URL? {
-        return URL(string: "\(Endpoints.base)\(endpoint)")
     }
 }

@@ -9,12 +9,15 @@ import SwiftUI
 
 @main
 struct GitHubViewerApp: App {
+
+    private var appModel = AppModel()
+
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                UserListView()
+                appModel.router.initialView()
             }
-            .environmentObject(Router())
+            .environment(appModel.router)
         }
     }
 }

@@ -29,9 +29,22 @@
 		FA376C0E2DCE4D1D0018F69B /* GitHubViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FA376C652DCFDB590018F69B /* Exceptions for "GitHubViewer" folder in "GitHubViewer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FA376BF62DCE4D1C0018F69B /* GitHubViewer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FA376BF92DCE4D1C0018F69B /* GitHubViewer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FA376C652DCFDB590018F69B /* Exceptions for "GitHubViewer" folder in "GitHubViewer" target */,
+			);
 			path = GitHubViewer;
 			sourceTree = "<group>";
 		};
@@ -106,6 +119,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FA376C792DCFF20F0018F69B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				FA376BF92DCE4D1C0018F69B /* GitHubViewer */,
@@ -195,6 +209,9 @@
 			);
 			mainGroup = FA376BEE2DCE4D1C0018F69B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FA376C772DCFE9A20018F69B /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FA376BF82DCE4D1C0018F69B /* Products */;
 			projectDirPath = "";
@@ -265,6 +282,10 @@
 			isa = PBXTargetDependency;
 			target = FA376BF62DCE4D1C0018F69B /* GitHubViewer */;
 			targetProxy = FA376C0F2DCE4D1D0018F69B /* PBXContainerItemProxy */;
+		};
+		FA376C792DCFF20F0018F69B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = FA376C782DCFF20F0018F69B /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -393,6 +414,7 @@
 		FA376C192DCE4D1D0018F69B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				API_TOKEN = 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;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -400,6 +422,7 @@
 				DEVELOPMENT_TEAM = 6BG2ZS4L7S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GitHubViewer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -421,6 +444,7 @@
 		FA376C1A2DCE4D1D0018F69B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				API_TOKEN = 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;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -428,6 +452,7 @@
 				DEVELOPMENT_TEAM = 6BG2ZS4L7S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GitHubViewer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -558,6 +583,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FA376C772DCFE9A20018F69B /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.59.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA376C782DCFF20F0018F69B /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA376C772DCFE9A20018F69B /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FA376BEF2DCE4D1C0018F69B /* Project object */;
 }

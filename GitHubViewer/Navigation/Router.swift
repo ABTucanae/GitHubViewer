@@ -22,6 +22,6 @@ class Router {
     }
 
     func view(for user: User) -> some View {
-        Text(user.login)
+        UserDetailView(viewModel: viewModelFactory.userDetailViewModel(user: user))
     }
 }

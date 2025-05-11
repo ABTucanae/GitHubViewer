@@ -29,6 +29,8 @@ class ApiClient: ApiClientProtocol {
         let request = requestFactory.createAuthenticatedRequest(url: url, method: method)
         let (data, response) = try await session.data(for: request, delegate: nil)
 
+        debugPrint("response from \(endpoint)", String(data: data, encoding: .utf8) ?? "")
+
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
             throw NetworkError.invalidResponse
         }

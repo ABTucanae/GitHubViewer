@@ -10,4 +10,5 @@ import Foundation
 enum Endpoints {
     static let base = "https://api.github.com"
     static let users = "/users"
+    static let user = "/user"
 }

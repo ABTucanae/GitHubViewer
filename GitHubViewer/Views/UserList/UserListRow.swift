@@ -15,17 +15,8 @@ struct UserListRow: View {
     var body: some View {
         NavigationLink(destination: router.view(for: user)) {
             HStack(spacing: 16) {
-                AsyncImage(url: user.avatarURL) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .accessibilityLabel("GitHub user image: \(user.login)")
-
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 40, height: 40)
+                AvatarView(url: user.avatarURL)
+                    .frame(width: 40, height: 40)
 
                 Text(user.login)
                     .font(.title3)
@@ -33,5 +24,12 @@ struct UserListRow: View {
             }
             .padding(.vertical, 4)
         }
+    }
+}
+
+#Preview {
+    List {
+        UserListRow(user: DummyUserService.testUser)
+            .environment(makePreviewRouter())
     }
 }

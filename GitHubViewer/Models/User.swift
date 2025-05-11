@@ -14,10 +14,16 @@ struct User: Decodable, Identifiable, Equatable {
         case login
         case avatarURL = "avatar_url"
         case reposURL = "repos_url"
+        case name
+        case followers
+        case following
     }
 
     let id: Int
     let login: String
     let avatarURL: URL
     let reposURL: URL
+    let name: String?
+    let followers: Int?
+    let following: Int?
 }

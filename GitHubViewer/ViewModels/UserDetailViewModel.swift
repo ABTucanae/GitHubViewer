@@ -1,17 +1,17 @@
 //
-//  UserListViewModel.swift
+//  UserDetailViewModel.swift
 //  GitHubViewer
 //
-//  Created by Alex on 10/05/2025.
+//  Created by Alex on 11/05/2025.
 //
 
 import Foundation
 
-@Observable class UserListViewModel {
+@Observable class UserDetailViewModel {
 
     var presentError = false
     private let userService: UserServicable
-    private(set) var users = [User]()
+    private(set)var user: User
     private(set) var isLoading = false
     private(set) var errorMessage = "" {
         didSet {
@@ -19,7 +19,8 @@ import Foundation
         }
     }
 
-    init(userService: UserServicable) {
+    init(user: User, userService: UserServicable) {
+        self.user = user
         self.userService = userService
     }
 
@@ -28,7 +29,7 @@ import Foundation
         defer { isLoading = false }
 
         do {
-            users = try await userService.fetchUsers()
+            user = try await userService.fetchUser(id: user.login)
         } catch {
             errorMessage = error.localizedDescription
         }

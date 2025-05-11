@@ -13,38 +13,16 @@ struct UserDetailView: View {
 
     var body: some View {
         VStack {
-            VStack(spacing: 20) {
-                AvatarView(url: viewModel.user.avatarURL)
-                    .frame(width: 150, height: 150)
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                UserInfoView(user: viewModel.user)
 
-                Text(viewModel.user.login)
-                    .font(.largeTitle)
-
-                if let name = viewModel.user.name {
-                    Text(name)
-                        .font(.headline)
-                }
-
-                HStack(spacing: 50) {
-                    VStack {
-                        Text("Followers:")
-                        Text("\(viewModel.user.followers ?? 0)")
-                    }
-
-                    VStack {
-                        Text("Following:")
-                        Text("\(viewModel.user.following ?? 0)")
-                    }
-                }
+                Spacer()
             }
-            .padding(.top, 20)
-            .padding(.bottom, 20)
-            .frame(maxWidth: .infinity)
-            .background(Color.secondary.opacity(0.25))
-
-            Spacer()
         }
         .onAppear(perform: loadUserInfo)
+        .alert(viewModel.errorMessage, isPresented: $viewModel.presentError, actions: {})
     }
 
     private func loadUserInfo() {
@@ -55,7 +33,5 @@ struct UserDetailView: View {
 }
 
 #Preview {
-    NavigationView {
-        UserDetailView(viewModel: UserDetailViewModel(user: DummyUserService.testUser, userService: DummyUserService()))
-    }
+    UserDetailView(viewModel: UserDetailViewModel(user: DummyUserService.testUser, userService: DummyUserService()))
 }

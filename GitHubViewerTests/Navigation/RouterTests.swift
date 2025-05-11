@@ -9,13 +9,24 @@
 import Testing
 import SwiftUI
 
+@MainActor
 struct RouterTests {
 
-    @MainActor
-    @Test func testViewForUser() async throws {
-        let user = "Placeholder User" // TODO: Replace with a user struct
+    private let router: Router
 
-        let router = Router()
+    init() {
+        router = Router(viewModelFactory: ViewModelFactory(apiClient: ApiClientStub()))
+    }
+
+    @Test func testInitialView() {
+        let view = router.initialView() as? UserListView
+
+        #expect(view != nil)
+    }
+
+    @Test func testViewForUser() {
+        let user = User(id: 1, login: "test", avatarURL: URL(string: "www.example.com")!, reposURL: URL(string: "www.example.com")!)
+
         let view = router.view(for: user) as? Text // TODO: Update view type
 
         #expect(view != nil)

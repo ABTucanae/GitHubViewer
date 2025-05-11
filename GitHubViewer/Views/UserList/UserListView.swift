@@ -27,10 +27,12 @@ struct UserListView: View {
         }
         .navigationTitle("Users")
         .alert(viewModel.errorMessage, isPresented: $viewModel.presentError, actions: {})
-        .onAppear {
-            Task {
-                await viewModel.load()
-            }
+        .onAppear(perform: loadUsers)
+    }
+
+    private func loadUsers() {
+        Task {
+            await viewModel.load()
         }
     }
 }

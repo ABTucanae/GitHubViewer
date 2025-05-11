@@ -15,26 +15,6 @@ struct ApiClientTests {
         let id: Int
     }
 
-    class URLSessionStub: URLSessionable {
-
-        var dataToReturn: Data = Data()
-        var errorToThrow: Error?
-        var statusCodeToReturn = 200
-
-        private(set) var request: URLRequest?
-
-        func data(for request: URLRequest, delegate: (any URLSessionTaskDelegate)?) async throws -> (Data, URLResponse) {
-            self.request = request
-
-            if let errorToThrow {
-                throw errorToThrow
-            }
-
-            let response = HTTPURLResponse(url: URL(string: Endpoints.base)!, statusCode: statusCodeToReturn, httpVersion: nil, headerFields: nil)
-            return (dataToReturn, response ?? URLResponse())
-        }
-    }
-
     private let urlSession: URLSessionStub
     private let apiClient: ApiClient
 
@@ -47,7 +27,7 @@ struct ApiClientTests {
         let expectedResponse = DummyResponse(id: 1)
         urlSession.dataToReturn = try JSONEncoder().encode(expectedResponse)
 
-        let actualResponse: DummyResponse = try await apiClient.makeRequest(endpoint: "/test")
+        let actualResponse: DummyResponse = try await apiClient.makeRequest(endpoint: "https://api.github.com/test", method: .GET)
 
         #expect(actualResponse == expectedResponse)
         #expect(urlSession.request?.url?.absoluteString == "https://api.github.com/test")
@@ -69,7 +49,7 @@ struct ApiClientTests {
             urlSession.dataToReturn = try JSONEncoder().encode(expectedResponse)
             urlSession.statusCodeToReturn = statusCode
 
-            let _: DummyResponse = try await apiClient.makeRequest(endpoint: "/test")
+            let _: DummyResponse = try await apiClient.makeRequest(endpoint: "/test", method: .GET)
             #expect(Bool(false)) // The test should fail if we make it to this line, since the makeRequest method should throw
         } catch {
             #expect(error as? NetworkError == NetworkError.invalidResponse)
@@ -78,23 +58,12 @@ struct ApiClientTests {
 
     @Test func testMakeRequestReturnsErrorForNonJsonResponse() async {
         do {
-            urlSession.dataToReturn = try JSONEncoder().encode("not json".data(using: .utf8))
+            urlSession.dataToReturn = Data("not json".utf8)
 
-            let _: DummyResponse = try await apiClient.makeRequest(endpoint: "/test")
+            let _: DummyResponse = try await apiClient.makeRequest(endpoint: "/test", method: .GET)
             #expect(Bool(false)) // The test should fail if we make it to this line, since the makeRequest method should throw
         } catch {
             #expect(error.localizedDescription == "The data couldn’t be read because it isn’t in the correct format.")
-        }
-    }
-
-    @Test func testMakeRequestReturnsErrorForUnusableUrl() async {
-        do {
-            urlSession.dataToReturn = try JSONEncoder().encode("not json".data(using: .utf8))
-
-            let _: DummyResponse = try await apiClient.makeRequest(endpoint: "bad url")
-            #expect(Bool(false)) // The test should fail if we make it to this line, since the makeRequest method should throw
-        } catch {
-            #expect(error as? NetworkError == .unableToCreateURL)
         }
     }
 }

@@ -14,14 +14,15 @@ protocol UserServicable {
 
 class UserService: UserServicable {
 
+    static let usersEndpoint = "\(Endpoints.base)\(Endpoints.users)"
+
     private let apiClient: ApiClientProtocol
-    private let userEndpoint = "\(Endpoints.base)\(Endpoints.users)"
 
     init(apiClient: ApiClientProtocol) {
         self.apiClient = apiClient
     }
 
     func fetchUsers() async throws -> [User] {
-        try await apiClient.makeRequest(endpoint: userEndpoint, method: .GET)
+        try await apiClient.makeRequest(endpoint: Self.usersEndpoint, method: .GET)
     }
 }

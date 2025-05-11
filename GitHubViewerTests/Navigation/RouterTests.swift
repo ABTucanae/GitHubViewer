@@ -25,9 +25,7 @@ struct RouterTests {
     }
 
     @Test func testViewForUser() {
-        let user = User(id: 1, login: "test", avatarURL: URL(string: "www.example.com")!, reposURL: URL(string: "www.example.com")!)
-
-        let view = router.view(for: user) as? Text // TODO: Update view type
+        let view = router.view(for: DummyUserService.testUser) as? UserDetailView
 
         #expect(view != nil)
     }

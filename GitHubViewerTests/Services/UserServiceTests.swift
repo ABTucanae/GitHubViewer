@@ -21,7 +21,7 @@ struct UserServiceTests {
 
     @Test func testFetchUsersReturnsListOfUsers() async throws {
         var endpointCalled = ""
-        let expectedUsers = [User(id: 1, login: "hello", avatarURL: URL(string: "www.example.com")!, reposURL: URL(string: "www.example.com")!)]
+        let expectedUsers = [DummyUserService.testUser]
 
         apiClient.requestHandler = { endpoint, _ in
             endpointCalled = endpoint
@@ -40,6 +40,33 @@ struct UserServiceTests {
 
         do {
             let _ = try await service.fetchUsers()
+            #expect(Bool(false))
+        } catch {
+            #expect(error as? UnitTestError == .randomError)
+        }
+    }
+
+    @Test func testFetchUserReturnsListOfUsers() async throws {
+        var endpointCalled = ""
+        let expectedUser = DummyUserService.testUser
+
+        apiClient.requestHandler = { endpoint, _ in
+            endpointCalled = endpoint
+            return expectedUser
+        }
+
+        let result = try await service.fetchUser(id: "test")
+        #expect(result == expectedUser)
+        #expect(endpointCalled == "\(UserService.userEndpoint)/test")
+    }
+
+    @Test func testFetchUserThrowsReturnedError() async {
+        apiClient.requestHandler = { endpoint, _ in
+            throw UnitTestError.randomError
+        }
+
+        do {
+            let _ = try await service.fetchUser(id: "")
             #expect(Bool(false))
         } catch {
             #expect(error as? UnitTestError == .randomError)

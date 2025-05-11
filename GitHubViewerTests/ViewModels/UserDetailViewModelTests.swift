@@ -1,34 +1,37 @@
 //
-//  UserListViewModelTests.swift
+//  UserDetailViewModelTests.swift
 //  GitHubViewerTests
 //
 //  Created by Alex on 11/05/2025.
 //
 
+import Foundation
 @testable import GitHubViewer
 import Testing
 
-struct UserListViewModelTests {
-
-    private let viewModel: UserListViewModel
+struct UserDetailViewModelTests {
+    
+    private let viewModel: UserDetailViewModel
     private let service: UserServiceStub
+    private let initialUser = User(id: 99, login: "start", avatarURL: URL(string: "example.com")!, reposURL: URL(string: "example.com")!, name: "initial state", followers: 1, following: 0)
 
     init() {
         service = UserServiceStub()
-        viewModel = UserListViewModel(userService: service)
+        viewModel = UserDetailViewModel(user: initialUser, userService: service)
     }
 
-    @Test func testLoadSuccessUpdatesUserList() async throws {
-        let expectedUsers = [DummyUserService.testUser]
+    @Test func testLoadSuccessUpdatesUser() async throws {
+        let expectedUser = DummyUserService.testUser
 
-        service.usersToReturn = expectedUsers
+        service.userToReturn = expectedUser
 
         await viewModel.load()
 
-        #expect(viewModel.users == expectedUsers)
+        #expect(viewModel.user == expectedUser)
         #expect(viewModel.isLoading == false)
         #expect(viewModel.presentError == false)
         #expect(viewModel.errorMessage == "")
+        #expect(service.fetchUserId == initialUser.login)
     }
 
     @Test func testLoadErrorUpdatesErrorMessage() async throws {
@@ -36,7 +39,7 @@ struct UserListViewModelTests {
 
         await viewModel.load()
 
-        #expect(viewModel.users == [])
+        #expect(viewModel.user == initialUser)
         #expect(viewModel.isLoading == false)
         #expect(viewModel.presentError == true)
         #expect(viewModel.errorMessage == "The operation couldn’t be completed. (GitHubViewerTests.UnitTestError error 1.)")

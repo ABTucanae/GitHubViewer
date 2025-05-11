@@ -14,6 +14,7 @@ enum UnitTestError: Error {
 }
 
 class ApiClientStub: ApiClientProtocol {
+
     var requestHandler: ((String, HTTPMethod) throws -> Any)?
 
     func makeRequest<T: Decodable>(endpoint: String, method: HTTPMethod) async throws -> T {

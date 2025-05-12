@@ -12,24 +12,19 @@ struct UserDetailView: View {
     @State var viewModel: UserDetailViewModel
 
     var body: some View {
-        VStack {
-            if viewModel.isLoading {
-                ProgressView()
-            } else {
-                List {
-                    Section {
-                        UserInfoView(user: viewModel.user)
-                            .listRowInsets(.init())
-                    }
+        List {
+            Section {
+                UserInfoView(user: viewModel.user)
+                    .listRowInsets(.init())
+            }
 
-                    ForEach(viewModel.repos) { repo in
-                        UserRepoRowView(repo: repo)
-                    }
-                }
+            ForEach(viewModel.repos) { repo in
+                UserRepoRowView(repo: repo)
             }
         }
         .onAppear(perform: loadUserInfo)
         .alert(viewModel.errorMessage, isPresented: $viewModel.presentError, actions: {})
+        .loadingSpiner(isLoading: viewModel.isLoading)
     }
 
     private func loadUserInfo() {

@@ -47,6 +47,6 @@ struct UserRepoRowView: View {
 #Preview {
     List {
         UserRepoRowView(repo: DummyRepositoryService.testRepos[0])
-            .environment(makePreviewRouter())
+            .environment(createPreviewRouter())
     }
 }

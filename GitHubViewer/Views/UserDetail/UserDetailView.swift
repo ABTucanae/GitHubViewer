@@ -38,4 +38,5 @@ struct UserDetailView: View {
     UserDetailView(viewModel: UserDetailViewModel(user: DummyUserService.testUser,
                                                   userService: DummyUserService(),
                                                   repositoryService: DummyRepositoryService()))
+    .environment(createPreviewRouter())
 }

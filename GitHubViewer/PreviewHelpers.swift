@@ -74,7 +74,7 @@ private class DummyApiClient: ApiClientProtocol {
 }
 
 @MainActor
-func makePreviewRouter() -> Router {
+func createPreviewRouter() -> Router {
     let factory = ViewModelFactory(apiClient: DummyApiClient())
     return Router(viewModelFactory: factory)
 }

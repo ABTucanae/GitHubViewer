@@ -35,6 +35,6 @@ struct UserListView: View {
 #Preview {
     NavigationView {
         UserListView(viewModel: UserListViewModel(userService: DummyUserService()))
-            .environment(makePreviewRouter())
+            .environment(createPreviewRouter())
     }
 }

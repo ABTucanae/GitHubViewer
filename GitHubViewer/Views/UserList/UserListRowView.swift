@@ -30,6 +30,6 @@ struct UserListRowView: View {
 #Preview {
     List {
         UserListRowView(user: DummyUserService.testUser)
-            .environment(makePreviewRouter())
+            .environment(createPreviewRouter())
     }
 }

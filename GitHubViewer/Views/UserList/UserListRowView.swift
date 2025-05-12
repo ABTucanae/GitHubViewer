@@ -1,5 +1,5 @@
 //
-//  UserListRow.swift
+//  UserListRowView.swift
 //  GitHubViewer
 //
 //  Created by Alex on 10/05/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserListRow: View {
+struct UserListRowView: View {
 
     let user: User
     @Environment(Router.self) var router
@@ -22,14 +22,14 @@ struct UserListRow: View {
                     .font(.title3)
                     .accessibilityLabel("GitHub user: \(user.login)")
             }
-            .padding(.vertical, 4)
         }
+        .padding(.vertical, 8)
     }
 }
 
 #Preview {
     List {
-        UserListRow(user: DummyUserService.testUser)
+        UserListRowView(user: DummyUserService.testUser)
             .environment(makePreviewRouter())
     }
 }

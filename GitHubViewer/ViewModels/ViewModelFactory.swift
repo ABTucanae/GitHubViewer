@@ -27,6 +27,7 @@ class ViewModelFactory: ViewModelBuildable {
 
     func userDetailViewModel(user: User) -> UserDetailViewModel {
         let userService = UserService(apiClient: apiClient)
-        return UserDetailViewModel(user: user, userService: userService)
+        let repositoryService = RepositoryService(apiClient: apiClient)
+        return UserDetailViewModel(user: user, userService: userService, repositoryService: repositoryService)
     }
 }

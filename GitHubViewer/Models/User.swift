@@ -22,7 +22,7 @@ struct User: Decodable, Identifiable, Equatable {
     let id: Int
     let login: String
     let avatarURL: URL
-    let reposURL: URL
+    let reposURL: String
     let name: String?
     let followers: Int?
     let following: Int?

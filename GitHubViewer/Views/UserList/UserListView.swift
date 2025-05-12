@@ -21,7 +21,7 @@ struct UserListView: View {
                 ProgressView()
             } else {
                 List(viewModel.users) { user in
-                    UserListRow(user: user)
+                    UserListRowView(user: user)
                 }
             }
         }

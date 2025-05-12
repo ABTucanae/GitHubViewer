@@ -8,7 +8,7 @@
 import Foundation
 @testable import GitHubViewer
 
-class UserServiceStub: UserServicable {
+class UserServiceStub: UserServiceProtocol {
 
     var usersToReturn = [User]()
     var userToReturn: User?

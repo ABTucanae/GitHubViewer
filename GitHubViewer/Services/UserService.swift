@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol UserServicable {
+protocol UserServiceProtocol {
 
     func fetchUsers() async throws -> [User]
     func fetchUser(id: String) async throws -> User
 }
 
-class UserService: UserServicable {
+class UserService: UserServiceProtocol {
 
     static let usersEndpoint = "\(Endpoints.base)\(Endpoints.users)"
     static let userEndpoint = "\(Endpoints.base)\(Endpoints.users)"

@@ -16,9 +16,16 @@ struct UserDetailView: View {
             if viewModel.isLoading {
                 ProgressView()
             } else {
-                UserInfoView(user: viewModel.user)
+                List {
+                    Section {
+                        UserInfoView(user: viewModel.user)
+                            .listRowInsets(.init())
+                    }
 
-                Spacer()
+                    ForEach(viewModel.repos) { repo in
+                        UserRepoRowView(repo: repo)
+                    }
+                }
             }
         }
         .onAppear(perform: loadUserInfo)
@@ -33,5 +40,7 @@ struct UserDetailView: View {
 }
 
 #Preview {
-    UserDetailView(viewModel: UserDetailViewModel(user: DummyUserService.testUser, userService: DummyUserService()))
+    UserDetailView(viewModel: UserDetailViewModel(user: DummyUserService.testUser,
+                                                  userService: DummyUserService(),
+                                                  repositoryService: DummyRepositoryService()))
 }

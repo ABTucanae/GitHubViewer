@@ -10,7 +10,7 @@ import Foundation
 @Observable class UserListViewModel {
 
     var presentError = false
-    private let userService: UserServicable
+    private let userService: UserServiceProtocol
     private(set) var users = [User]()
     private(set) var isLoading = false
     private(set) var errorMessage = "" {
@@ -19,7 +19,7 @@ import Foundation
         }
     }
 
-    init(userService: UserServicable) {
+    init(userService: UserServiceProtocol) {
         self.userService = userService
     }
 

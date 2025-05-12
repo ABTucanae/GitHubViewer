@@ -23,9 +23,9 @@ struct RequestFactoryTests {
         let factory = RequestFactory(accessToken: accessToken)
         let url = URL(string: "\(Endpoints.base)/example")!
 
-        let request = factory.createAuthenticatedRequest(url: url, method: .POST)
+        let request = factory.createAuthenticatedRequest(url: url, method: .GET)
 
-        #expect(request.httpMethod == "POST")
+        #expect(request.httpMethod == "GET")
         #expect(request.url == url)
         #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer \(accessToken)")
         #expect(request.value(forHTTPHeaderField: "Accept") == "application/vnd.github+json")

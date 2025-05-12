@@ -24,4 +24,8 @@ class Router {
     func view(for user: User) -> some View {
         UserDetailView(viewModel: viewModelFactory.userDetailViewModel(user: user))
     }
+
+    func view(for repository: Repository) -> some View {
+        RepositoryInfoView(repository: repository)
+    }
 }

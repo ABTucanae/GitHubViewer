@@ -13,7 +13,7 @@ struct UserRepoRowView: View {
     @Environment(Router.self) var router
 
     var body: some View {
-        NavigationLink(destination: Text("Webview goes here")) {
+        NavigationLink(destination: router.view(for: repo)) {
             HStack(spacing: 8) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(repo.name)

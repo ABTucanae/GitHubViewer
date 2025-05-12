@@ -19,7 +19,7 @@ struct LoadingSpinnerModifier: ViewModifier {
             if isLoading {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.background)
+                    .background(.ultraThinMaterial)
             }
         }
     }

@@ -39,7 +39,7 @@ class DummyRepositoryService: RepositoryServiceProtocol {
             description: "Description goes here",
             fork: true, language: "Swift",
             stargazersCount: 10,
-            htmlURL: URL(string: "https://example.com")!
+            htmlURL: URL(string: "https://google.com")!
         ),
         Repository(
             id: 1,
@@ -48,7 +48,7 @@ class DummyRepositoryService: RepositoryServiceProtocol {
             fork: false,
             language: "Swift",
             stargazersCount: 10,
-            htmlURL: URL(string: "https://example.com")!
+            htmlURL: URL(string: "https://google.com")!
         ),
         Repository(
             id: 2,
@@ -57,7 +57,7 @@ class DummyRepositoryService: RepositoryServiceProtocol {
             fork: false,
             language: "Dart",
             stargazersCount: 100,
-            htmlURL: URL(string: "https://example.com")!
+            htmlURL: URL(string: "https://google.com")!
         )
     ]
 

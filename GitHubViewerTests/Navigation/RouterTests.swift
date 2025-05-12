@@ -29,4 +29,10 @@ struct RouterTests {
 
         #expect(view != nil)
     }
+
+    @Test func testViewForRepo() {
+        let view = router.view(for: DummyRepositoryService.testRepos[0]) as? RepositoryInfoView
+
+        #expect(view != nil)
+    }
 }

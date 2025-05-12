@@ -26,7 +26,7 @@ struct LoadingSpinnerModifier: ViewModifier {
 }
 
 extension View {
-    func loadingSpiner(isLoading: Bool) -> some View {
+    func loadingSpinner(isLoading: Bool) -> some View {
         modifier(LoadingSpinnerModifier(isLoading: isLoading))
     }
 }

@@ -24,7 +24,7 @@ struct UserDetailView: View {
         }
         .onAppear(perform: loadUserInfo)
         .alert(viewModel.errorMessage, isPresented: $viewModel.presentError, actions: {})
-        .loadingSpiner(isLoading: viewModel.isLoading)
+        .loadingSpinner(isLoading: viewModel.isLoading)
     }
 
     private func loadUserInfo() {

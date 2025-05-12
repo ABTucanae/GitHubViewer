@@ -22,7 +22,7 @@ struct UserListView: View {
         .navigationTitle("Users")
         .alert(viewModel.errorMessage, isPresented: $viewModel.presentError, actions: {})
         .onAppear(perform: loadUsers)
-        .loadingSpiner(isLoading: viewModel.isLoading)
+        .loadingSpinner(isLoading: viewModel.isLoading)
     }
 
     private func loadUsers() {

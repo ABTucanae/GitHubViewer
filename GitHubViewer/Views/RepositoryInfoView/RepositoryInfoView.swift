@@ -14,7 +14,7 @@ struct RepositoryInfoView: View {
 
     var body: some View {
         WebContentView(url: repository.htmlURL, isLoading: $isLoading)
-            .loadingSpiner(isLoading: isLoading)
+            .loadingSpinner(isLoading: isLoading)
     }
 }
 
